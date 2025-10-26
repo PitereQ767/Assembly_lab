@@ -1,0 +1,6 @@
+Rozpocz?to kompilacj? o 19:23...
+1>------ Kompilacja rozpocz?ta: Projekt: Lab_2_projekt, Konfiguracja: Debug Win32 ------
+1>Assembling program.asm...
+1>Lab_2_projekt.vcxproj -> C:\Users\ratko\Documents\Studia\3 semestr\AKO\Lab2\Projekt\Lab_2_projekt\Debug\Lab_2_projekt.exe
+========== Kompilacja: sukces ? 1, niepowodzenie ? 0, aktualne ? 0, pomini?to ? 0 ==========
+========== Kompilacja ? uko?czono o 19:24. Czas trwania: 00,593 s ==========
