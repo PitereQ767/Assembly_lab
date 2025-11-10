@@ -27,5 +27,23 @@
     <MASM Include="zad_3_2.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
+    <MASM Include="zad_3_3.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="program3.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="zad_3_4.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="zad_3_5.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="program4.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="zad_3_6.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

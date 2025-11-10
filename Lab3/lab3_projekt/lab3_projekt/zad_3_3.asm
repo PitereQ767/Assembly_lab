@@ -89,6 +89,9 @@ _wczytaj_do_EAX ENDP
 
 _main PROC
 	call _wczytaj_do_EAX
+
+	mul eax
+
 	call _wyswietl_EAX
 
 
