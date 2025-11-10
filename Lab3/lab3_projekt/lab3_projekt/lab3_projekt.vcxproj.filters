@@ -15,37 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="program_test.asm">
+    <MASM Include="program1.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
-    <MASM Include="zamiana_mala_wielka_z_pliku.asm">
+    <MASM Include="zad_3_1.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
-    <MASM Include="Zad_2_5.asm">
+    <MASM Include="program2.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
-    <MASM Include="Zad_2_6.asm">
-      <Filter>Pliki źródłowe</Filter>
-    </MASM>
-    <MASM Include="Zad_2_7.asm">
-      <Filter>Pliki źródłowe</Filter>
-    </MASM>
-    <MASM Include="slowa_od_tylu.asm">
-      <Filter>Pliki źródłowe</Filter>
-    </MASM>
-    <MASM Include="chat.asm">
-      <Filter>Pliki źródłowe</Filter>
-    </MASM>
-    <MASM Include="co_drugie.asm">
-      <Filter>Pliki źródłowe</Filter>
-    </MASM>
-    <MASM Include="unikod_utf.asm">
-      <Filter>Pliki źródłowe</Filter>
-    </MASM>
-    <MASM Include="lab_1.asm">
-      <Filter>Pliki źródłowe</Filter>
-    </MASM>
-    <MASM Include="lab_2.asm">
+    <MASM Include="zad_3_2.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
   </ItemGroup>
