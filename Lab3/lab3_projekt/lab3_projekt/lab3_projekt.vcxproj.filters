@@ -45,5 +45,17 @@
     <MASM Include="zad_3_6.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
+    <MASM Include="base_13.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="base_13_lepsze.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="base_13_wczytaj.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="base_17.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
