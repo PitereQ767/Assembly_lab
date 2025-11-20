@@ -3,6 +3,8 @@
 
 public _szukaj4_max 
 public _plus_jeden
+public _odejmij_jeden
+public _przestaw
 
 .data
 
@@ -66,5 +68,66 @@ _plus_jeden PROC
 	pop ebp
 	ret
 _plus_jeden ENDP
+
+_liczba_przeciwna PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+
+	mov ebx, [ebp + 8]
+	mov eax, [ebx]
+	neg eax
+	mov [ebx], eax
+
+	pop ebx
+	pop ebp
+	ret
+_liczba_przeciwna ENDP
+
+_odejmij_jeden PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+	push ecx
+
+	mov ebx, [ebp + 8]
+	mov ecx, [ebx]
+	mov eax, [ecx]
+	dec eax
+	mov [ecx], eax
+
+	pop ecx
+	pop ebx
+	pop ebp
+	ret
+_odejmij_jeden ENDP
+
+_przestaw PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+
+	mov ebx, [ebp + 8]
+	mov ecx, [ebp + 12]
+	dec ecx
+
+petla:
+	mov eax, [ebx]
+	cmp eax, [ebx + 4]
+	jle gotowe
+
+	mov edx, [ebx + 4]
+	mov [ebx + 4], eax
+	mov [ebx], edx
+
+
+gotowe:
+	add ebx, 4
+	loop petla
+
+	pop ebx
+	pop ebp
+	ret
+_przestaw ENDP
 
 END
