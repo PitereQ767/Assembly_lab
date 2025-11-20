@@ -57,5 +57,14 @@
     <MASM Include="base_17.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
+    <MASM Include="base_17_wczytaj.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="lab1.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="lab2.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
