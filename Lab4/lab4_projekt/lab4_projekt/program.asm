@@ -125,6 +125,7 @@ gotowe:
 	add ebx, 4
 	loop petla
 
+
 	pop ebx
 	pop ebp
 	ret

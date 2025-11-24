@@ -1,5 +1,6 @@
 #include<stdio.h>
-#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
 
 #define ROZMAIR 5
 
@@ -43,6 +44,8 @@ int main() {
 	//odejmij_jeden(&wsk);
 	//printf("Twoja liczba po odjeciu jeden: %d", k);
 
+	srand(time(NULL));
+
 	int n = ROZMAIR;
 	int tab[10];
 
@@ -62,6 +65,7 @@ int main() {
 	printf("\n----------------------------------------\n");
 	printf("\nTalica po przestawieniu: \n");
 	wypisz_tablice(tab, n);
+	
 
 	return 0;
 }
