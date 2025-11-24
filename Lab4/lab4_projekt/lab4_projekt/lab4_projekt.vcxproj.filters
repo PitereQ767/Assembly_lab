@@ -21,12 +21,18 @@
     <ClCompile Include="main_2.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="main_64.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="program.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
     <MASM Include="zadania.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="zadania_64.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
   </ItemGroup>
