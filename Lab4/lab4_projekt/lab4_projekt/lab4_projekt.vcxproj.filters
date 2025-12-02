@@ -24,6 +24,9 @@
     <ClCompile Include="main_64.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="main_32.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="program.asm">
@@ -33,6 +36,9 @@
       <Filter>Pliki źródłowe</Filter>
     </MASM>
     <MASM Include="zadania_64.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="zadania_32.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
   </ItemGroup>
