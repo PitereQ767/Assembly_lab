@@ -21,9 +21,15 @@
     <MASM Include="funkcje.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
+    <MASM Include="funkcje_SSE.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="main_SSE.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>

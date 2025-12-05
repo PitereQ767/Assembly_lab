@@ -2,6 +2,8 @@
 .model flat
 
 public _srednia_harm
+public _e_do_x
+public _nowy_exp
 
 .data
 	n dd ?
@@ -9,6 +11,8 @@ public _srednia_harm
 	wynik dd 0.0
 
 	x dd ?
+
+	wynik_2 dd 0.0
 
 .code
 _srednia_harm PROC
@@ -99,5 +103,52 @@ _e_do_x PROC
 
 	ret
 _e_do_x ENDP
+
+_nowy_exp PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+	push esi
+	push edi
+
+	mov esi, 20
+	fld dword ptr [ebp + 8]
+	fld1
+	;stos st(0) = 1, st(1) = x
+	fld1
+	;stos st(0)= 1 (wyraz), st(1) = suma, st(2) = x
+
+	mov ecx, 1
+
+petla:
+	cmp ecx, 20
+	jge koniec
+
+	fld st(2) ; stos st(0)=x, st(1)=wyraz, st(2)=suma
+	fmulp st(1), st(0) ; stos st(0) = wyraz * x, st(1) = suma
+	
+	push ecx
+	fild dword ptr [esp]
+	fdivp st(1), st(0)
+	pop ecx ;stos st(0)= (wyraz*x)/n, st(1) = suma, st(2)=x
+
+	fadd st(1), st(0)
+
+	inc ecx
+	jmp petla
+
+
+
+koniec:
+	fstp st(0)
+
+
+	pop edi
+	pop esi
+	pop ebx
+	pop ebp
+
+	ret
+_nowy_exp ENDP
 
 END

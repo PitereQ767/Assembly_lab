@@ -2,6 +2,7 @@
 
 float srednia_harm(float* tablica, unsigned int n);
 float e_do_x(float x);
+float nowy_exp(float x);
 
 int main() {
 	//unsigned int n;
@@ -20,7 +21,7 @@ int main() {
 
 	//free(tab);
 
-	float wynik = e_do_x(2.0);
+	float wynik = nowy_exp(2.0);
 
 	printf("Wynik: %f", wynik);
 
