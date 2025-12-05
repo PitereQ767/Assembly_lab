@@ -2,7 +2,7 @@
 .XMM
 .model flat
 
-public _dodaj_SSE, _pierwiastek_SSE, _odwrotnosc_SSE
+public _dodaj_SSE, _pierwiastek_SSE, _odwrotnosc_SSE, _dodawanie_16
 
 .code
 	_dodaj_SSE PROC
@@ -82,5 +82,31 @@ public _dodaj_SSE, _pierwiastek_SSE, _odwrotnosc_SSE
 
 		ret
 	_odwrotnosc_SSE ENDP
+
+	_dodawanie_16 PROC
+		push ebp
+		mov ebp, esp
+		push edi
+		push esi
+		push ebx
+
+		mov esi, [ebp + 8]
+		mov edi, [ebp + 12]
+		mov ebx, [ebp + 16]
+
+		movups xmm6, [esi]
+		movups xmm5, [edi]
+		paddsb xmm5, xmm6
+
+		movups [ebx], xmm5
+
+
+		pop ebx
+		pop esi
+		pop edi
+		pop ebp
+
+		ret
+	_dodawanie_16 ENDP
 
 END
