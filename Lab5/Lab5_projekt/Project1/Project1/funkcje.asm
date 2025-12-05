@@ -8,6 +8,8 @@ public _srednia_harm
 	jeden dd +1.0
 	wynik dd 0.0
 
+	x dd ?
+
 .code
 _srednia_harm PROC
 	push ebp
@@ -56,5 +58,46 @@ koniec:
 	ret
 
 _srednia_harm ENDP
+
+_e_do_x PROC
+	push ebp
+	mov ebp, esp
+
+	push ebx
+
+
+	fld dword ptr [ebp + 8]
+	fldl2e
+	fmulp st(1), st(0) ; x * log2e
+
+	fst st(1)
+
+	frndint
+
+	fsub st(1), st(0)
+
+	;sytuacja na stosie: st(0) = czesc calkowita, st(1) = czesc ulamkowa
+
+	fxch
+	;po zmianie: st(0) = czesc ulamkowa, st(1) = czesc calkowita
+
+	f2xm1
+	fld1
+	faddp st(1), st(0)
+
+	;sytuacja na stosie: st(0) = 2^xlog2e ulamkowe, st(1) = x * log2e calkowite
+
+	fscale 
+
+	fstp st(1)
+
+	;wynik w st(0)
+
+
+	pop ebx
+	pop ebp
+
+	ret
+_e_do_x ENDP
 
 END
