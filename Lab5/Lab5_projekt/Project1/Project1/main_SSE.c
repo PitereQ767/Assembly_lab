@@ -4,6 +4,9 @@ float dodaj_SSE(float*, float *, float *);
 float pierwiastek_SSE(float*, float*);
 float odwrotnosc_SSE(float*, float*);
 char dodawanie_16(char*, char*, char*);
+void int2float(int* calkowite, float* zmienno_przec);
+void pm_jeden(float* tab1);
+void dodawanie_SSE(float* a);
 
 int main() {
 	float p[4] = { 4.0, 1.5, 9.0, 2.5 };
@@ -34,6 +37,21 @@ int main() {
 	printf("\n %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", liczby_A[0], liczby_A[1], liczby_A[2], liczby_A[3], liczby_A[4], liczby_A[5], liczby_A[6], liczby_A[7], liczby_A[8], liczby_A[9], liczby_A[10], liczby_A[11], liczby_A[12], liczby_A[13], liczby_A[14], liczby_A[15]);
 	printf("\n %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", liczby_B[0], liczby_B[1], liczby_B[2], liczby_B[3], liczby_B[4], liczby_B[5], liczby_B[6], liczby_B[7], liczby_B[8], liczby_B[9], liczby_B[10], liczby_B[11], liczby_B[12], liczby_B[13], liczby_B[14], liczby_B[15]);
 	printf("\n %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], w[11], w[12], w[13], w[14], w[15]);
+
+	int a[2] = { -17, 24 };
+	float r_2[4];
+
+	int2float(a, r_2);
+	printf("\n\nKonwersja = %f %f\n", r_2[0], r_2[1]);
+
+	float tablica[4] = { 27.5, 143.57, 2100.0, -3.51 };
+	printf("\n %f %f %f %f\n", tablica[0], tablica[1], tablica[2], tablica[3]);
+	pm_jeden(tablica);
+	printf("\n %f %f %f %f\n", tablica[0], tablica[1], tablica[2], tablica[3]);
+
+	float wyniki[4];
+	dodawanie_SSE(wyniki);
+	printf("\nWyniki: %f %f %f %f\n", wyniki[0], wyniki[1], wyniki[2], wyniki[3]);
 
 	return 0;
 }
