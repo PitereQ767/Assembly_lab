@@ -1,12 +1,37 @@
 .686
 .model flat
+.xmm
 
-public _softmax
+public _softmax, _szybki_max
 
 .data
 	suma dd 0.0
 
 .code
+
+_e_do_x PROC
+
+	fldl2e
+	fmulp st(1), st(0) ;st(0) = x * log2x
+	fst st(1)
+
+	frndint 
+
+	fsub st(1), st(0); ;st(0) = czesc calkowita, st(1) = czesc ulamkowa
+
+	fxch ;st(0) = czesc ulamkowa, st(1) = czesc calkowita
+
+	f2xm1
+	fld1
+	faddp st(1), st(0)
+
+	fscale
+	
+	fstp st(1)
+
+
+	ret
+_e_do_x ENDP
 _softmax PROC
 	push ebp
 	mov ebp, esp
@@ -17,72 +42,84 @@ _softmax PROC
 	mov esi, [ebp + 8]
 	mov ebx, [ebp + 12]
 	mov edi, [ebp + 16]
-	dec edi
-	mov eax, edi ; przechowujemy n - 1
+	
+	xor ecx, ecx
 
-	finit
 petla:
-	fld dword ptr [esi + 4*edi]
-	fldl2e ;stos st(0) = log2e, st(1) = x
-	fmulp st(1), st(0) ;stos st(0) = x * log2e
-	fst st(1)
-	frndint ;zaokraglenie wartosci do liczby calkowitej
+	cmp ecx, edi
+	jge koniec_sumy
 
-	fsub st(1), st(0) ; stos: st(0) = (x * log2e)zaokraglone calkowite, st(1) = czesc ulamkowa (x * log2e)
-
-	fxch ; stos: st(0) = czesc ulamkowa (x * log2e) , st(1) = (x * log2e)zaokraglone calkowite
-
-	f2xm1 ;stos: st(0) = 2^ czesc ulamkowa (x * log2e) , st(1) = (x * log2e)zaokraglone calkowite
-	fld1
-	faddp st(1), st(0)
-
-	fscale
-
+	fld dword ptr [esi + 4*ecx]
+	call _e_do_x
 	fld suma
 	faddp st(1), st(0)
+
 	fst suma
 
-	fstp st(0)
-	fstp st(0)
+	inc ecx
+	jmp petla
 
-	dec edi
-	cmp edi, 0
-	jge petla
 
-	mov edi, eax
+koniec_sumy:
+	xor ecx, ecx
+
 petla_2:
-	fld dword ptr [esi + 4*edi]
-	fldl2e ;stos st(0) = log2e, st(1) = x
-	fmulp st(1), st(0) ;stos st(0) = x * log2e
-	fst st(1)
-	frndint ;zaokraglenie wartosci do liczby calkowitej
+	cmp ecx, edi
+	jge koniec
 
-	fsub st(1), st(0) ; stos: st(0) = (x * log2e)zaokraglone calkowite, st(1) = czesc ulamkowa (x * log2e)
-
-	fxch ; stos: st(0) = czesc ulamkowa (x * log2e) , st(1) = (x * log2e)zaokraglone calkowite
-
-	f2xm1 ;stos: st(0) = 2^ czesc ulamkowa (x * log2e) , st(1) = (x * log2e)zaokraglone calkowite
-	fld1
-	faddp st(1), st(0)
-
-	fscale
-	fstp st(1)
-
+	fld dword ptr [esi + 4*ecx]
+	call _e_do_x
 	fld suma
 	fdivp st(1), st(0)
+	fstp dword ptr [ebx + 4*ecx]
 
-	fst dword ptr [ebx + 4*edi]
-	dec edi
-	cmp edi, 0
-	jge petla_2
-
+	inc ecx
+	jmp petla_2
 
 
+koniec:
+	
 	pop ebx
 	pop edi
 	pop esi
 	pop ebp
 	ret
 _softmax ENDP
+
+_szybki_max PROC
+	push ebp
+	mov ebp, esp
+	push edi
+	push esi
+	push ebx
+
+	mov esi, [ebp + 8]
+	mov edi, [ebp + 12]
+	mov ebx, [ebp + 16]
+	mov ecx, [ebp + 20]
+
+	movups xmm5, [esi]
+	movups xmm6, [edi]
+
+	pmaxsw xmm5, xmm6
+
+	movups [ebx], xmm5
+
+	movups xmm5, [esi + ecx]
+	movups xmm6, [edi + ecx]
+
+	pmaxsw xmm5, xmm6
+
+	movups [ebx + ecx], xmm5
+
+
+
+	pop ebx
+	pop edi
+	pop esi
+
+	pop ebp
+	ret
+_szybki_max ENDP
 
 END
