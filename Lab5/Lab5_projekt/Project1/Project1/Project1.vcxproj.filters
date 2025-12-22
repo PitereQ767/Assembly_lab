@@ -27,6 +27,12 @@
     <MASM Include="lab_funkcje.asm">
       <Filter>Pliki źródłowe</Filter>
     </MASM>
+    <MASM Include="funkcje_vecs.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
+    <MASM Include="funkcje_lab_2.asm">
+      <Filter>Pliki źródłowe</Filter>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -39,6 +45,12 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="main_lab.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="main_vecs.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="main_lab_2.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
