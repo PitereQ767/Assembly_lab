@@ -26,10 +26,9 @@ int main() {
 	szybki_max(val1, val2, wynik, 16);
 	printf("\nWynik: %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd %hd", wynik[0], wynik[1], wynik[2], wynik[3], wynik[4], wynik[5], wynik[6], wynik[7], wynik[8], wynik[9], wynik[10], wynik[11], wynik[12], wynik[13], wynik[14], wynik[15]);*/
 
-	//float wynik = objetosc_stozka(5, 3, 10.0);
-	//printf("\nWynik: %f", wynik);
+	float wynik = objetosc_stozka(5, 3, 10.0);
+	printf("\nWynik: %f", wynik);
 
-	test(3.0, 5.0);
 
 	return 0;
 }

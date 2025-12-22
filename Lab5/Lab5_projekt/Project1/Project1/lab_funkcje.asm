@@ -124,7 +124,6 @@ _szybki_max PROC
 	ret
 _szybki_max ENDP
 
-<<<<<<< HEAD
 _objetosc_stozka PROC
 	push ebp
 	mov ebp, esp
@@ -165,28 +164,5 @@ _objetosc_stozka PROC
 	ret
 _objetosc_stozka ENDP
 
-_test PROC
-	push ebp
-	mov ebp, esp
-	push esi
-	push edi
-	push ebx
 
-	finit
-	fld dword ptr [ebp + 8]
-	fld dword ptr [ebp + 12]
-
-	fistp dana
-	fild dana
-
-	pop ebx
-	pop edi
-	pop esi
-
-	pop ebp
-	ret
-_test ENDP
-
-=======
->>>>>>> b2118c5c0d81f1d641cdff56023fee79e4a57238
 END
