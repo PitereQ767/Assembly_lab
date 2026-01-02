@@ -1,12 +1,15 @@
 .686
 .model flat
 
-public _roznica, _kopia_tablicy, _komunikat, _szukaj_elem_min, _szyfruj, _kwadrat, _iteracja, _zadanie8
+public _roznica, _kopia_tablicy, _komunikat, _szukaj_elem_min, _szyfruj, _kwadrat, _iteracja, _zadanie8, _zadanie9, _zadanie10, _konwerter, _pole_kola, _avg_wd, _liczba_procesorow, _sortowanie, _ASCII_na_UTF16
 
-extern _malloc:PROC
+extern _malloc:PROC, _GetSystemInfo@4:PROC
+
 
 .data
 	cztery dd 4
+	naj_0 dd 0
+	naj_1 dd 0
 
 .code
 _roznica PROC
@@ -233,8 +236,6 @@ _kwadrat PROC
 	sub eax, 4
 	add ecx, eax
 
-	
-
 
 koniec:
 	mov eax, ecx
@@ -266,7 +267,7 @@ _iteracja ENDP
 
 _zadanie8 PROC
 	push ebp
-	mov esp, ebp
+	mov ebp, esp
 	push esi
 	push edi
 	push ebx
@@ -288,9 +289,325 @@ koniec:
 	pop ebx
 	pop edi
 	pop esi
-	pop ebx
+	pop ebp
 	ret
 _zadanie8 ENDP
 
+_zadanie9 PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+	
+	mov edx, 0001004Ah
+
+	bt edx, 6
+	jnc w_dol
+
+	add edx, 80h
+
+w_dol:
+	and edx, 0ffffff80h
+	
+
+	pop ebx
+	pop ebp
+	ret
+_zadanie9 ENDP
+
+_zadanie10 PROC
+	push ebp
+	mov ebp, esp
+	push esi
+	push edi
+
+	mov esi, 00000101H
+	mov edi, 00000080H
+
+	bt edi, 31
+	jc edi_wieksze
+
+	mov eax, edi
+
+	shl eax, 1
+
+	cmp eax, esi
+
+	jc koniec
+
+edi_wieksze:
+	clc
+	
+koniec:
+	
+	pop edi
+	pop esi
+	pop ebp
+	ret
+_zadanie10 ENDP
+
+_konwerter PROC
+	push ebp
+	mov ebp, esp
+	push esi
+	push edi
+	push ebx
+
+	xor edx, edx
+	xor eax, eax
+
+	mov esi, [ebp + 8]
+	mov edi, [ebp + 12]
+
+	mov ebx, [esi]
+	test ebx, 80000000h
+	jz dodatnia
+
+	mov edx, 80000000h
+
+dodatnia:
+	shl ebx, 1
+	shr ebx, 24
+	sub bx, 127
+	add bx, 1023
+	shl ebx, 20
+	or edx, ebx
+
+	mov ebx, [esi]
+	and ebx, 007fffffh
+
+	shr ebx,3
+	or edx, ebx
+
+	mov ebx, [esi]
+	and ebx, 00000007h
+
+	or eax, ebx
+	shl eax, 29
+
+
+	mov [edi], eax
+	mov [edi + 4], edx
+
+	pop ebx
+	pop edi
+	pop esi
+	pop ebp
+	ret
+_konwerter ENDP
+
+_pole_kola PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+
+	mov ebx, [ebp + 8]
+
+	finit
+	fld dword ptr [ebx]
+	fld st(0)
+
+	fmulp st(1), st(0) ;r^2
+	fldpi
+	fmulp st(1), st(0)
+
+	pop ebx
+	pop ebp
+	ret
+_pole_kola ENDP
+
+_avg_wd PROC
+	push ebp
+	mov ebp, esp
+	push esi
+	push edi
+	push ebx
+
+	mov ecx, [ebp + 8]
+	mov ebx, [ebp + 12] ;tablica
+	mov edi, [ebp + 16] ;wagi
+
+	xor esi, esi
+
+	finit
+	fldz
+	fldz
+
+petla:
+	cmp esi, ecx
+	je koniec
+	fld dword ptr [ebx + 4*esi]
+	fld dword ptr [edi + 4*esi]
+	inc esi
+	fmul st(1), st(0)
+	faddp st(3), st(0)
+	faddp st(1), st(0)
+	jmp petla
+
+
+koniec:
+	fxch ;zamiana st(0) z st(1)
+	fdivp st(1), st(0)
+	
+	pop ebx
+	pop edi
+	pop esi
+	pop ebp
+	ret
+_avg_wd ENDP
+
+_liczba_procesorow PROC
+	push ebp
+	mov ebp, esp
+
+	sub esp, 36
+
+	push ebx
+	push edi
+	push esi
+
+	lea ebx, [ebp - 36]
+	push ebx
+	call  _GetSystemInfo@4
+
+	mov eax, [ebx + 20]
+
+	pop esi
+	pop edi
+	pop ebx
+	add esp, 36
+	pop ebp
+	ret
+_liczba_procesorow ENDP
+
+_zamiana PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+	push esi
+	push edi
+	push eax
+
+	mov ebx, [ebp + 8]
+	mov edi, [ebp + 12]
+
+	;dolna czesc
+	mov eax, [ebx]
+	mov esi, [edi]
+
+	mov [ebx], esi
+	mov [edi], eax
+
+	;gorna czesc
+	mov eax, [ebx + 4]
+	mov esi, [edi + 4]
+
+	mov [ebx + 4], esi
+	mov [edi + 4], eax
+
+	pop eax
+	pop edi
+	pop esi
+	pop ebx
+	pop ebp
+	ret
+_zamiana ENDP
+
+_sortowanie PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+	push edi
+	push esi
+
+	mov ebx, [ebp + 8]
+	mov ecx, [ebp + 12]
+	sub ecx, 1
+
+	xor edi, edi
+	xor esi, esi
+
+petla:
+	cmp edi, ecx
+	je koniec
+
+	mov eax, [ebx + 8*edi]
+	mov edx, [ebx + 8*edi + 4]
+	inc edi
+	cmp edx, [ebx + 8*edi + 4]
+	ja zamiana
+
+	cmp eax, [ebx + 8*edi]
+	ja zamiana
+	inc esi
+	jmp petla
+zamiana:
+	lea eax, [ebx + 8*esi]
+	lea edx, [ebx + 8*esi + 8]
+	push eax
+	push edx
+	call _zamiana
+	add esp, 8
+	inc esi
+	jmp petla
+
+koniec:
+	mov eax, [ebx + 8*ecx]
+	mov edx, [ebx + 8*ecx + 4]
+
+	pop esi
+	pop edi
+	pop ebx
+	pop ebp
+	ret
+_sortowanie ENDP
+
+_ASCII_na_UTF16 PROC
+	push ebp
+	mov ebp, esp
+	push ebx
+	push edi
+	push esi
+
+	mov ebx, [ebp + 8]
+	mov ecx, [ebp + 12]
+
+	lea eax, [2*ecx]
+	add eax, 2
+
+	push ecx
+	push eax
+	call _malloc
+	add esp, 4
+	pop ecx
+
+	mov edi, eax
+	xor esi, esi
+
+petla:
+	cmp esi, ecx
+	je koniec
+
+	movzx ax, byte ptr [ebx + esi]
+	mov [edi + 2*esi], ax
+	inc esi
+
+	jmp petla
+
+
+koniec:
+
+	mov ax, 0
+	mov [edi + 2*esi], ax
+
+
+
+	mov eax, edi
+
+	pop esi
+	pop edi
+	pop ebx
+	pop ebp
+	ret
+_ASCII_na_UTF16 ENDP
 
 END
