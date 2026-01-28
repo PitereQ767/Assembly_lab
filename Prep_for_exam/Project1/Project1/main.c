@@ -18,6 +18,10 @@ float avg_wd(int n, void* tablica, void* wagi);
 unsigned int liczba_procesorow();
 unsigned __int64 sortowanie(unsigned __int64* tab1, unsigned int n);
 wchar_t* ASCII_na_UTF16(char* znaki, int n);
+double plus_jeden(double x);
+unsigned int NWD(unsigned int a, unsigned int b);
+float miesz2float(int p);
+float float_razy_float(float a, float b);
 
 
 int main() {
@@ -106,7 +110,28 @@ int main() {
 	printf("\n------------------Zadanie18------------------\n");
 	char* znaki = "abcdefghij";
 	wchar_t* wskaznik = ASCII_na_UTF16(znaki, 10);
-	MessageBoxW(0, wskaznik, L"Tytlul", 4);
+	//MessageBoxW(0, wskaznik, L"Tytlul", 4);
+
+	printf("\n------------------CZESC 2------------------\n");
+
+	printf("\n------------------Zadanie16------------------\n");
+	double x_2 = 8589934592.0;
+	double wynik_plus = plus_jeden(x_2);
+	printf("Liczba poweikszona o jeden: %f", wynik_plus);
+
+	printf("\n------------------Zadanie18------------------\n");
+	unsigned int nwd_a = 12, nwd_b = 8;
+	unsigned int wynik_nwd = NWD(nwd_a, nwd_b);
+	printf("NWD liczb %d i %d = %d", nwd_a, nwd_b, wynik_nwd);
+
+	printf("\n------------------Zadanie19------------------\n");
+	int liczba_miesz = 0x00000840;
+	float wynik_miesz = miesz2float(liczba_miesz);
+	printf("Odpowiedz: %f", wynik_miesz);
+
+	printf("\n------------------Zadanie21------------------\n");
+	float wynik_m = float_razy_float(2.25, 14.875);
+	printf("Wynik mnozenia: %f", wynik_m);
 
 	return 0;
 }
