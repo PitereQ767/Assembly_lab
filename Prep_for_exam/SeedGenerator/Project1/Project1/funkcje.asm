@@ -2,7 +2,7 @@
 .model flat
 .XMM
 
-public _salt, _mul64
+public _salt, _mul64, _gen_xi
 
 extern _GetComputerNameA@8:PROC
 
@@ -124,6 +124,58 @@ _mul64 PROC
 	pop ebp
 	ret
 _mul64 ENDP
+
+_gen_xi PROC
+	push ebp
+	mov ebp, esp
+	sub esp, 8
+	push esi
+
+	cmp dword ptr [ebp + 12], 0
+	je koniec
+
+	mov dword ptr [ebp - 8], 0
+	mov dword ptr [ebp - 4], 0
+
+	mov esi, [ebp + 8]
+	mov eax, [esi]
+	mov ecx, 0A2E7B175h
+	mul ecx
+	add [ebp - 8], eax
+	add [ebp - 4], edx
+
+	mov eax, [esi]
+	xor ecx, ecx
+	mov cx, 2875h
+	mul ecx
+	add [ebp - 4], eax
+	
+	mov eax, [esi + 4]
+	mov ecx, 0A2E7B175h
+	mul ecx
+	add [ebp - 4], eax
+
+	and dword ptr [ebp - 4], 0000ffffh
+
+	mov eax, dword ptr [ebp - 8]
+	mov [esi], eax
+	mov eax, dword ptr [ebp - 4]
+	mov [esi + 4], eax
+
+	mov eax, [ebp + 12]
+	sub eax, 1
+
+	push eax
+	push esi
+	call _gen_xi
+	add esp, 8
+
+koniec:
+	pop esi
+	add esp, 8
+	pop ebp
+	ret
+_gen_xi ENDP
 
 
 END
